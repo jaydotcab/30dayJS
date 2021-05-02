@@ -153,7 +153,7 @@
     <li data-time="3:16">
       Video 49
     </li>
-    <li data-time="1:10">
+    <li data-time="1:15">
       Video 50
     </li>
     <li data-time="6:10">
@@ -182,6 +182,32 @@
     </li>
   </ul>
 <script>
+const timeNodes = Array.from(document.querySelectorAll('[data-time'));
+
+// separates minutes and seconds
+const seconds = timeNodes
+  .map(node => node.dataset.time)
+  .map(timeCode => {
+    const [mins, secs] = timeCode.split(':').map(parseFloat);
+    return (mins * 60) + secs;
+console.log(mins, secs);
+  })
+
+  // tally's /adds times together to get whole time
+  .reduce((total, vidSeconds) => total + vidSeconds);
+
+  let secondsLeft = seconds;
+  const hours = Math.floor(secondsLeft / 3600);
+  secondsLeft = secondsLeft % 3600;
+  const mins = Math.floor(secondsLeft / 60);
+  secondsLeft = secondsLeft % 60;
+  console.log(hours, mins, secondsLeft);
+
+
+
+
+
+
 </script>
 </body>
 </html>
